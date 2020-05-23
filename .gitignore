@@ -1,0 +1,22 @@
+﻿################################################################################
+# Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/ProjektNPgr4/v16
+/.vs
+/main/Debug/main.tlog
+/main/Debug/main.exe
+*.ilk
+*.log
+*.obj
+*.pdb
+*.txt
+*.idb
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.ipch
+*.suo
+*.db
+*.opendb
