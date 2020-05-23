@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include "sin.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ void menu()
     switch (m)
     {
     case 1:
-        //sin();
+        sin();
         break;
     case 2:
         //jedlin();
