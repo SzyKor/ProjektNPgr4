@@ -4,8 +4,6 @@ using namespace std;
 #define HALF END/2
 void rect()
 {
-    int X[END];
-    int Y[END];
     ofstream file("file.dat");
     for(int i=0;i<END;i++)
     {
