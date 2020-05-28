@@ -1,3 +1,5 @@
 # ProjektNPgr4
-Projekt na przedmiot Narzędzia Programistyczne na UTP w Bydgoszczy.
-Temat: Programowa realizcja funkcji nieliniowych
+Funkcje pulsacyjne
+oh no
+
+na razie jest tylko prostokątna.
