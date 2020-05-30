@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -149,10 +150,98 @@ void wykladnicza()
     }
 }
 
+//Początek fragmentu odpowiedzialnego za rysownie funkcji sinusoidalnej
+struct pozycja
+{
+    int x;
+    double wartosc;
+}pozycje;
+
+double degreetorad(double deg)
+{
+    double rad = (deg * M_PI) / 180;
+    return rad;
+}
+
+void sin()
+{
+    int x = 360, px = 0;
+    float py = 0;
+    bool odx = 0, ody = 0, wb = 0;
+    cout << "Podaj ile x chcesz wyswietlic wykres (Polecana wartosc: 360) (zaczyna sie od zera, przesuniecie dostepne jest w dalszej czesci)" << endl;
+    while ((!(cin >> x)) && x > 0)
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc x, podaj wartosc x ponownie" << endl;
+    }
+    cout << "Podaj przesuniecie wzgledem osi X (prawo-/lewo+)" << endl;
+    while (!(cin >> px))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc przesuniecia, podaj wartosc przesuniecia x ponownie" << endl;
+    }
+    cout << "Podaj przesuniecie wzgledem osi Y (gora+/dol-)" << endl;
+    while (!(cin >> py))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc przesuniecia, podaj wartosc przesuniecia y ponownie" << endl;
+    }
+    cout << "Odbicie wzgledem osi X (Tak 1/Nie 0)" << endl;
+    while (!(cin >> odx))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc odbicia, podaj jescze raz" << endl;
+    }
+    cout << "Odbicie wzgledem osi Y (Tak 1/Nie 0)" << endl;
+    while (!(cin >> ody))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc odbicia, podaj jescze raz" << endl;
+    }
+    cout << "Wartosc bezwzgledna z funkcji (Tak 1/Nie 0)" << endl;
+    while (!(cin >> wb))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc, podaj jescze raz" << endl;
+    }
+    pozycja* wynik = new pozycja[x];
+    for (int i = 0; i < x; i++)
+    {
+        wynik[i].wartosc = sin(degreetorad(i)) - py;
+        if (ody)
+        {
+            wynik[i].x = (-1 * i) + px;
+        }
+        else
+        {
+            wynik[i].x = i + px;
+        }
+    }
+    ofstream plik;
+    plik.open("file.dat");
+    for (int i = 0; i < x; i++)
+    {
+        if (odx)
+        {
+            wynik[i].wartosc *= -1;
+        }
+        if (wb)
+        {
+            wynik[i].wartosc = abs(wynik[i].wartosc);
+        }
+        plik << wynik[i].x << " " << wynik[i].wartosc << endl;
+    }
+    system("start gnuplot -p -e \"plot 'file.dat' with lines\"");
+}
+//Koniec fragmentu odpowiedzialnego za rysowanie funkcji sinusoidalnej
+
 //##################################################
-    /*
-    Tutaj mają być wywołania funckji w menu, funkcje w oddzienych plikach, niech będą od siebie niezależne, żeby nie było problemów ze scalaniem.
-    */
 
 void menu()
 {
@@ -170,7 +259,7 @@ void menu()
     switch (m)
     {
     case 1:
-        //sin();
+        sin();
         break;
     case 2:
         float a,b,x,mp;
