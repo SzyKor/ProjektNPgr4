@@ -23,17 +23,47 @@ void sin()
     float py = 0;
     bool odx = 0, ody = 0, wb = 0;
     cout << "Podaj ile x chcesz wyswietlic wykres (Polecana wartosc: 360) (zaczyna sie od zera, przesuniecie dostepne jest w dalszej czesci)" << endl;
-    cin >> x;
+    while ((!(cin >> x)) && x > 0)
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc x, podaj wartosc x ponownie" << endl;
+    }
     cout << "Podaj przesuniecie wzgledem osi X (prawo-/lewo+)" << endl;
-    cin >> px;
+    while (!(cin >> px))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc przesuniecia, podaj wartosc przesuniecia x ponownie" << endl;
+    }
     cout << "Podaj przesuniecie wzgledem osi Y (gora+/dol-)" << endl;
-    cin >> py;
+    while (!(cin >> py))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc przesuniecia, podaj wartosc przesuniecia y ponownie" << endl;
+    }
     cout << "Odbicie wzgledem osi X (Tak 1/Nie 0)" << endl;
-    cin >> odx;
+    while (!(cin >> odx))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc odbicia, podaj jescze raz" << endl;
+    }
     cout << "Odbicie wzgledem osi Y (Tak 1/Nie 0)" << endl;
-    cin >> ody;
+    while (!(cin >> ody))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc odbicia, podaj jescze raz" << endl;
+    }
     cout << "Wartosc bezwzgledna z funkcji (Tak 1/Nie 0)" << endl;
-    cin >> wb;
+    while (!(cin >> wb))
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Podana bledna wartosc, podaj jescze raz" << endl;
+    }
     pozycja* wynik = new pozycja[x];
     for (int i = 0; i < x; i++)
     {
@@ -72,6 +102,8 @@ void menu()
     cout << " 3 - pulsacyjnej \n 4 - wykladniczej" << endl;
     while ((!(cin >> m)) || m > 4 || m < 1)
     {
+        cin.clear();
+        cin.ignore();
         cout << "\nPODANO BLEDNA WARTOSC, PROSZE O PODANIE POPRAWNEJ WARTOSCI\n" << endl; //Podwójne przejscie do nowej linii w celu wyróżnienia komunikatu
         cout << "Wybierz, ktorej funkcji chcesz namalowac wykres" << endl;
         cout << " 1 - sinusoidalnej \n 2 - jednostkowo-liniowej" << endl;
