@@ -7,7 +7,7 @@ using namespace std;
 //#################################################################
 // Początek funkcji liniowej
 
-float liniowa(){
+void liniowa(){
     float a, b, x, mp;
     int tabX[8],i;
     int tabY[8];
