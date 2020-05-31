@@ -243,6 +243,110 @@ void sin()
 
 //##################################################
 
+//Poczatek Pulsacyjne
+void puls_rect(float freq,int END)
+{
+    int separator=END/freq;
+    ofstream file("file.dat");
+    int j=0;
+    for(int i=0;i<END;i++)
+    {
+            if(j==separator-1) j=0;
+
+            if(j>=separator/4&&j<=(separator*3)/4)
+                {
+
+                    if(j==separator/4)
+                    {
+                        file<<i<<"\t"<<0<<"\n";
+                        file<<i<<"\t"<<1<<"\n";
+                    }else
+                    if(j==(separator*3)/4)
+                    {
+                        file<<i<<"\t"<<1<<"\n";
+                        file<<i<<"\t"<<0<<"\n";
+                    }else
+                    file<<i<<"\t"<<1<<"\n";
+                }else
+                file<<i<<"\t"<<0<<"\n";
+            j++;
+
+    }
+    file.close();
+}
+
+
+
+void puls_dirac(float freq,int END)
+{
+    int separator=END/freq;
+    ofstream file("file.dat");
+    int j=0;
+    for(int i=0;i<END;i++)
+    {
+            if(j==separator-1) j=0;
+
+            if(j==separator/2)
+            {
+                file<<i<<"\t"<<0<<"\n";
+                file<<i<<"\t"<<1<<"\n";
+                file<<i<<"\t"<<0<<"\n";
+            }
+
+            else
+            file<<i<<"\t"<<0<<"\n";
+
+            j++;
+
+    }
+    file.close();
+}
+
+void puls_sinc(float freq,int END)
+{
+    int separator=END/freq;
+    ofstream file("file.dat");
+    float podzial=360/float(separator);
+    float incr=-180;
+    for(int i=0;i<END;i++)
+    {
+            if(incr>=180) incr=-180;
+
+
+                    file<<i<<"\t"<<(sin(incr)/incr)<<"\n";
+                    incr=incr+podzial;
+    }
+    file.close();
+}
+
+void puls_menu()
+{
+    float freq;
+    int END;
+    cout<<"Podaj czestotliwiosc i dlugosc osi x\n";
+    cout<<"Czestotliwosc dowolna(polecam 3),";
+    cout<<"Dlugosc osi x wplywa na dokladnosc, im wieksza liczba tym lepeiej (polecam 1000)\n";
+    cout<<"Podaj Czestotliwosc: "; cin>>freq;cout<<endl;
+    cout<<"Podaj dlugosc osi x: ";cin>>END;cout<<endl;
+
+    int sw;
+    do{
+        cout<<"\nDostepne sa 3 funkcje pulsacyjne:\n";
+        cout<<"1. Prostokatna \n2. Dirac delta \n3. Sinus cardinalis\n";
+        cout<<"Wybierz funkcje (1-3)\n";
+        cin>>sw;
+        switch(sw)
+        {
+            case(1):puls_rect(freq,END);system(("start gnuplot -p -e \"set yrange[-1:2];plot 'file.dat' with lines\""));break;
+            case(2):puls_dirac(freq,END);system("start gnuplot -p -e \"set yrange[-1:2];plot 'file.dat' with lines\"");break;
+            case(3):puls_sinc(freq,END);system("start gnuplot -p -e \"set yrange[-1:2];plot 'file.dat' with lines\"");break;
+            default:sw=0;
+        }
+    }while(sw==0);
+
+}
+// Koniec Pulsacyjne
+//##################################################
 void menu()
 {
     int m;
@@ -266,7 +370,7 @@ void menu()
         liniowa(a,b,x,mp);
         break;
     case 3:
-        //pul();
+        puls_menu();
         break;
     case 4:
         wykladnicza();
