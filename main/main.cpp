@@ -4,7 +4,11 @@
 #include <cmath>
 using namespace std;
 
-void liniowa(float a, float b, float x, float mp){
+//#################################################################
+// Początek funkcji liniowej
+
+float liniowa(){
+    float a, b, x, mp;
     int tabX[8],i;
     int tabY[8];
     cout << "Funkcja liniowa"<<endl;
@@ -44,7 +48,8 @@ void liniowa(float a, float b, float x, float mp){
     system("start gnuplot -p -e \"plot 'file.dat' with lines\"");
 }
 
-
+//Koniec funkcji liniowej
+//#######################################################################
 
 void zapisz(float x[], float y[])
 {
@@ -351,13 +356,13 @@ void menu()
 {
     int m;
     cout << "Wybierz, ktorej funkcji chcesz namalowac wykres" << endl;
-    cout << " 1 - sinusoidalnej \n 2 - jednostkowo-liniowej" << endl;
+    cout << " 1 - sinusoidalnej \n 2 - liniowa" << endl;
     cout << " 3 - pulsacyjnej \n 4 - wykladniczej" << endl;
     while ((!(cin >> m)) || m>4 || m<1)
     {
         cout << "\nPODANO BLEDNA WARTOSC, PROSZE O PODANIE POPRAWNEJ WARTOSCI\n" << endl; //Podwójne przejscie do nowej linii w celu wyróżnienia komunikatu
         cout << "Wybierz, ktorej funkcji chcesz namalowac wykres" << endl;
-        cout << " 1 - sinusoidalnej \n 2 - jednostkowo-liniowej" << endl;
+        cout << " 1 - sinusoidalnej \n 2 - liniowa" << endl;
         cout << " 3 - pulsacyjnej \n 4 - wykladniczej" << endl;
     }
     switch (m)
@@ -366,8 +371,7 @@ void menu()
         sin();
         break;
     case 2:
-        float a,b,x,mp;
-        liniowa(a,b,x,mp);
+        liniowa();
         break;
     case 3:
         puls_menu();
